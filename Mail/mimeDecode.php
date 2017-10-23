@@ -599,7 +599,7 @@ class Mail_mimeDecode extends PEAR
                 }
                 
                 // do not de-quote 'xxx*= itesm.. 
-                $key_is_trans = $key[strlen($key)-1] == '*';
+                $key_is_trans = ($key && $key[strlen($key)-1] == '*');
                 
                 if (!$key_is_trans && !$escaped && ($c == '"' || $c == "'")) {
                     // start quoted area..
@@ -667,7 +667,7 @@ class Mail_mimeDecode extends PEAR
          
         // handle language translation of '*' ending others.
         foreach( $clean_others as $key =>$val) {
-            if ( $key[strlen($key)-1] != '*') {
+            if ($key && $key[strlen($key)-1] != '*') {
                 $clean_others[strtolower($key)] = $val;
                 continue;
             }
