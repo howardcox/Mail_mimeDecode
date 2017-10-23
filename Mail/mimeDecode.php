@@ -677,13 +677,14 @@ class Mail_mimeDecode extends PEAR
             //              extended-other-values
             $match = array();
             $info = preg_match("/^([^']+)'([^']*)'(.*)$/", $val, $match);
-             
-            $clean_others[$key] = urldecode($match[3]);
-            $clean_others[strtolower($key)] = $clean_others[$key];
-            $clean_others[strtolower($key).'-charset'] = $match[1];
-            $clean_others[strtolower($key).'-language'] = $match[2];
-            
-            
+
+            if ($match)
+            {
+                $clean_others[$key] = urldecode($match[3]);
+                $clean_others[strtolower($key)] = $clean_others[$key];
+                $clean_others[strtolower($key).'-charset'] = $match[1];
+                $clean_others[strtolower($key).'-language'] = $match[2];
+            }
         }
         
         
